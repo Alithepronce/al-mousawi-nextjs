@@ -1,0 +1,230 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background-color: #0b0c10;
+  color: #ffffff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header & Navigation */
+header {
+  border-bottom: 2px solid #8B0000;
+  background: rgba(11, 12, 16, 0.85);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #D4A843;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo span {
+  color: #8B0000;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: #D4A843;
+  background: rgba(139, 0, 0, 0.2);
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: radial-gradient(circle, rgba(139, 0, 0, 0.15) 0%, rgba(11, 12, 16, 1) 70%);
+}
+
+.hero h1 {
+  font-size: 48px;
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.hero h1 span {
+  color: #D4A843;
+}
+
+.hero p {
+  font-size: 20px;
+  color: #c5c6c7;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+}
+
+.cta-btn {
+  display: inline-block;
+  background-color: #8B0000;
+  color: #ffffff;
+  padding: 12px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 2px solid #D4A843;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cta-btn:hover {
+  background-color: #D4A843;
+  color: #0b0c10;
+  box-shadow: 0 0 15px rgba(212, 168, 67, 0.4);
+}
+
+/* Glass Card & Services */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(139, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #D4A843;
+}
+
+.card-icon {
+  font-size: 40px;
+  color: #D4A843;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  font-size: 22px;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.card p {
+  color: #c5c6c7;
+  font-size: 15px;
+}
+
+/* Form Styles */
+.form-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(139, 0, 0, 0.3);
+  padding: 40px;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #D4A843;
+  font-weight: 600;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%;
+  padding: 12px;
+  background: rgba(11, 12, 16, 0.8);
+  border: 1px solid rgba(139, 0, 0, 0.5);
+  border-radius: 6px;
+  color: #ffffff;
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  outline: none;
+  border-color: #D4A843;
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: #8B0000;
+  color: #ffffff;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid #D4A843;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #D4A843;
+  color: #0b0c10;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 60px;
+  border-top: 1px solid rgba(139, 0, 0, 0.2);
+  color: #c5c6c7;
+}
+
+.footer-logo {
+  color: #D4A843;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
