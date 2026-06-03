@@ -1,38 +1,52 @@
+import React from 'react';
+
 export default function Services() {
-  const services = [
+  const servicesList = [
     {
-      title: 'تصميم مواقع ويب فاخرة',
-      desc: 'واجهات مستخدم مخصصة وجذابة باستخدام Next.js و Tailwind CSS تناسب الهوية البصرية لشركتك.',
-      icon: '🎨'
+      title: '💻 تصميم المواقع الاحترافية',
+      description: 'واجهات مستخدم (UI/UX) سريعة ومتجاوبة مع الهواتف والشاشات الكبيرة باستخدام أحدث تقنيات الويب المستقرة.'
     },
     {
-      title: 'أنظمة إدارة الأعمال',
-      desc: 'قواعد بيانات سحابية متطورة مع Supabase لإدارة المبيعات، الحجوزات، والعملاء بسلاسة.',
-      icon: '📊'
+      title: '⚡ الأنظمة السحابية وقواعد البيانات',
+      description: 'بناء قواعد بيانات سحابية متكاملة وسريعة تعتمد على Supabase مع ربطها بشكل مباشر وآمن.'
     },
     {
-      title: 'أتمتة العمليات وبوتات تيليجرام',
-      desc: 'بوتات ذكية تفاعلية لخدمة العملاء وأخذ الطلبات وإرسال الإشعارات التلقائية الفورية.',
-      icon: '🤖'
+      title: '🤖 بوتات تيليجرام المؤتمتة',
+      description: 'تطوير بوتات تيليجرام ذكية تسهل استقبال طلبات العملاء وتزودك بتنبيهات فورية ومباشرة.'
     }
-  ]
+  ];
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-16">
-      <div className="text-center max-w-3xl mx-auto">
-        <h2 className="text-3xl font-extrabold text-white sm:text-4xl">خدماتنا الاحترافية</h2>
-        <p className="mt-4 text-zinc-400">نقدم حلولاً متكاملة ومصممة خصيصاً لتلبية احتياجات عملك ومساعدتك على النمو والتميز.</p>
-      </div>
-
-      <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((s, idx) => (
-          <div key={idx} className="p-8 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-[#D4A843] transition-all glass-card">
-            <span className="text-4xl mb-4 block">{s.icon}</span>
-            <h3 className="text-xl font-bold text-white mb-2">{s.title}</h3>
-            <p className="text-zinc-400 text-sm leading-relaxed">{s.desc}</p>
+    <div style={{ maxWidth: '900px', margin: '3rem auto', padding: '0 1rem' }}>
+      <h2 style={{
+        fontSize: '2.5rem',
+        color: '#D4A843',
+        textAlign: 'center',
+        marginBottom: '3rem',
+        fontWeight: 'bold'
+      }}>
+        خدماتنا البرمجية المتميزة ✨
+      </h2>
+      
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: '2rem'
+      }}>
+        {servicesList.map((service, index) => (
+          <div key={index} style={{
+            background: 'linear-gradient(135deg, rgba(139, 0, 0, 0.1) 0%, rgba(10, 10, 10, 0.8) 100%)',
+            border: '1px solid rgba(212, 168, 67, 0.2)',
+            padding: '2rem',
+            borderRadius: '12px',
+            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+            transition: 'transform 0.3s ease'
+          }}>
+            <h3 style={{ color: '#D4A843', fontSize: '1.4rem', marginBottom: '1rem' }}>{service.title}</h3>
+            <p style={{ color: '#ccc', lineHeight: '1.7', fontSize: '1rem' }}>{service.description}</p>
           </div>
         ))}
       </div>
     </div>
-  )
+  );
 }
