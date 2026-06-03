@@ -1,103 +1,177 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
+import React, { useState } from 'react';
 
 export default function Order() {
-  const [formData, setFormData] = useState({ name: '', phone: '', details: '', platform: 'Next.js' })
-  const [status, setStatus] = useState({ success: false, loading: false, message: '' })
+  const [formData, setFormData] = useState({ name: '', telegram: '', budget: '', details: '' });
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setStatus({ success: false, loading: true, message: '' })
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Save to LocalStorage for safety
+    const orders = JSON.parse(localStorage.getItem('mousawi_orders') || '[]');
+    orders.push({ ...formData, date: new Date().toLocaleString() });
+    localStorage.setItem('mousawi_orders', JSON.stringify(orders));
 
-    try {
-      // Offline fallback & database setup simulation
-      const savedOrders = JSON.parse(localStorage.getItem('mbp_orders') || '[]')
-      const newOrder = { ...formData, id: Date.now(), date: new Date().toISOString() }
-      savedOrders.push(newOrder)
-      localStorage.setItem('mbp_orders', JSON.stringify(savedOrders))
-
-      // Simulate API ping or hit endpoint if configured
-      setStatus({ 
-        success: true, 
-        loading: false, 
-        message: 'تم استلام طلبك بنجاح! تم حفظ البيانات محلياً وبشكل آمن، سنتصل بك قريباً جداً ⚖️' 
-      })
-      setFormData({ name: '', phone: '', details: '', platform: 'Next.js' })
-    } catch (err) {
-      setStatus({ success: false, loading: false, message: 'حدث خطأ في التسجيل، يرجى المحاولة لاحقاً.' })
-    }
-  }
+    setSubmitted(true);
+    setFormData({ name: '', telegram: '', budget: '', details: '' });
+  };
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-16">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 glass-card">
-        <h2 className="text-2xl font-bold text-white mb-6 text-center">اطلب موقعك الجديد الآن ✨</h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+    <div style={{ maxWidth: '600px', margin: '3rem auto', padding: '0 1rem' }}>
+      <h2 style={{
+        fontSize: '2.2rem',
+        color: '#D4A843',
+        textAlign: 'center',
+        marginBottom: '1rem',
+        fontWeight: 'bold'
+      }}>
+        اطلب موقعك الإلكتروني 🚀
+      </h2>
+      <p style={{ textAlign: 'center', color: '#ccc', marginBottom: '2.5rem' }}>
+        املأ الاستمارة وسنقوم بالاتصال بك فوراً للاتفاق ومباشرة العمل.
+      </p>
+
+      {submitted ? (
+        <div style={{
+          background: 'rgba(212, 168, 67, 0.1)',
+          border: '1px solid #D4A843',
+          padding: '2rem',
+          borderRadius: '12px',
+          textAlign: 'center'
+        }}>
+          <h3 style={{ color: '#D4A843', marginBottom: '1rem', fontSize: '1.5rem' }}>🎉 تم إرسال طلبك بنجاح!</h3>
+          <p style={{ color: '#ffffff' }}>شكرًا لثقتك بـ مكتب الموسوي. قمنا بحفظ طلبك محلياً وجاري مراجعته الآن.</p>
+          <button 
+            onClick={() => setSubmitted(false)}
+            style={{
+              marginTop: '1.5rem',
+              backgroundColor: '#8B0000',
+              color: '#fff',
+              border: 'none',
+              padding: '0.6rem 1.5rem',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: 'bold'
+            }}
+          >
+            إرسال طلب آخر
+          </button>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} style={{
+          background: 'rgba(20, 20, 20, 0.8)',
+          border: '1px solid rgba(212, 168, 67, 0.15)',
+          padding: '2.5rem',
+          borderRadius: '16px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.5rem',
+          boxShadow: '0 15px 35px rgba(0,0,0,0.4)'
+        }}>
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-2">الاسم الكامل</label>
-            <input
-              type="text"
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#D4A843', fontWeight: 'bold' }}>الاسم الكامل:</label>
+            <input 
+              type="text" 
               required
               value={formData.name}
-              onChange={e => setFormData({...formData, name: e.target.value})}
-              className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4A843]"
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="مثال: علي الموسوي"
+              style={{
+                width: '100%',
+                padding: '0.8rem',
+                borderRadius: '8px',
+                border: '1px solid rgba(255,255,255,0.1)',
+                backgroundColor: '#111',
+                color: '#fff',
+                fontSize: '1rem'
+              }}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-2">رقم الهاتف أو معرّف تيليجرام</label>
-            <input
-              type="text"
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#D4A843', fontWeight: 'bold' }}>معرف تيليجرام (Telegram Username):</label>
+            <input 
+              type="text" 
               required
-              value={formData.phone}
-              onChange={e => setFormData({...formData, phone: e.target.value})}
-              className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4A843]"
-              placeholder="@Alithepronce"
+              value={formData.telegram}
+              onChange={(e) => setFormData({ ...formData, telegram: e.target.value })}
+              placeholder="مثال: @Alithepronce"
+              style={{
+                width: '100%',
+                padding: '0.8rem',
+                borderRadius: '8px',
+                border: '1px solid rgba(255,255,255,0.1)',
+                backgroundColor: '#111',
+                color: '#fff',
+                fontSize: '1rem',
+                direction: 'ltr',
+                textAlign: 'right'
+              }}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-2">التقنية المفضلة</label>
-            <select
-              value={formData.platform}
-              onChange={e => setFormData({...formData, platform: e.target.value})}
-              className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4A843]"
-            >
-              <option value="Next.js">Next.js (سريع وذكي)</option>
-              <option value="Astro">Astro (خفيف جداً وصديق لمحركات البحث)</option>
-              <option value="HTML/JS">HTML5 & Vanilla JS (بسيط وسهل)</option>
-            </select>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#D4A843', fontWeight: 'bold' }}>الميزانية التقريبية (بالدولار):</label>
+            <input 
+              type="text" 
+              required
+              value={formData.budget}
+              onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+              placeholder="مثال: 500$"
+              style={{
+                width: '100%',
+                padding: '0.8rem',
+                borderRadius: '8px',
+                border: '1px solid rgba(255,255,255,0.1)',
+                backgroundColor: '#111',
+                color: '#fff',
+                fontSize: '1rem'
+              }}
+            />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-2">تفاصيل ومواصفات الموقع المطلوبة</label>
-            <textarea
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#D4A843', fontWeight: 'bold' }}>تفاصيل ومواصفات الموقع المطلوب:</label>
+            <textarea 
+              required
               rows="4"
-              required
               value={formData.details}
-              onChange={e => setFormData({...formData, details: e.target.value})}
-              className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4A843]"
-              placeholder="اكتب هنا ما تريده في موقعك الجديد..."
+              onChange={(e) => setFormData({ ...formData, details: e.target.value })}
+              placeholder="اكتب هنا ما تريده في موقعك الإلكتروني بالتفصيل..."
+              style={{
+                width: '100%',
+                padding: '0.8rem',
+                borderRadius: '8px',
+                border: '1px solid rgba(255,255,255,0.1)',
+                backgroundColor: '#111',
+                color: '#fff',
+                fontSize: '1rem',
+                fontFamily: 'inherit',
+                resize: 'vertical'
+              }}
             ></textarea>
           </div>
 
-          <button
+          <button 
             type="submit"
-            disabled={status.loading}
-            className="w-full py-3 bg-[#8B0000] hover:bg-red-800 text-white font-bold rounded-lg transition-all"
+            style={{
+              backgroundColor: '#8B0000',
+              color: '#ffffff',
+              border: 'none',
+              padding: '1rem',
+              borderRadius: '8px',
+              fontWeight: 'bold',
+              fontSize: '1.1rem',
+              cursor: 'pointer',
+              boxShadow: '0 4px 15px rgba(139, 0, 0, 0.4)',
+              transition: 'background-color 0.2s'
+            }}
           >
-            {status.loading ? 'جاري الإرسال...' : 'إرسال الطلب الآن 🚀'}
+            إرسال الطلب الآن 🚀
           </button>
         </form>
-
-        {status.message && (
-          <div className={`mt-6 p-4 rounded-lg text-sm text-center ${status.success ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-900' : 'bg-red-950/40 text-red-400 border border-red-900'}`}>
-            {status.message}
-          </div>
-        )}
-      </div>
+      )}
     </div>
-  )
+  );
 }
