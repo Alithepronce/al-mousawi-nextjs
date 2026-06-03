@@ -1,49 +1,29 @@
-import React from 'react';
-
 export default function Services() {
   const servicesList = [
     {
-      title: '💻 تصميم المواقع الاحترافية',
-      description: 'واجهات مستخدم (UI/UX) سريعة ومتجاوبة مع الهواتف والشاشات الكبيرة باستخدام أحدث تقنيات الويب المستقرة.'
+      title: "💻 تصميم المواقع الإلكترونية",
+      desc: "مواقع متكاملة وفائقة السرعة مصممة بـ Next.js و Astro ومحسنة لمحركات البحث (SEO).",
     },
     {
-      title: '⚡ الأنظمة السحابية وقواعد البيانات',
-      description: 'بناء قواعد بيانات سحابية متكاملة وسريعة تعتمد على Supabase مع ربطها بشكل مباشر وآمن.'
+      title: "⚙️ تطوير الأنظمة السحابية",
+      desc: "أنظمة إدارة وقواعد بيانات متكاملة وآمنة بالكامل على سحابة Supabase و Cloudflare.",
     },
     {
-      title: '🤖 بوتات تيليجرام المؤتمتة',
-      description: 'تطوير بوتات تيليجرام ذكية تسهل استقبال طلبات العملاء وتزودك بتنبيهات فورية ومباشرة.'
+      title: "🤖 أتمتة وبوتات ذكية",
+      desc: "تطوير بوتات تيليجرام تفاعلية وذكية مرتبطة بأنظمتك لتسهيل استلام وخدمة العملاء تلقائياً.",
     }
   ];
 
   return (
-    <div style={{ maxWidth: '900px', margin: '3rem auto', padding: '0 1rem' }}>
-      <h2 style={{
-        fontSize: '2.5rem',
-        color: '#D4A843',
-        textAlign: 'center',
-        marginBottom: '3rem',
-        fontWeight: 'bold'
-      }}>
-        خدماتنا البرمجية المتميزة ✨
-      </h2>
-      
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '2rem'
-      }}>
-        {servicesList.map((service, index) => (
-          <div key={index} style={{
-            background: 'linear-gradient(135deg, rgba(139, 0, 0, 0.1) 0%, rgba(10, 10, 10, 0.8) 100%)',
-            border: '1px solid rgba(212, 168, 67, 0.2)',
-            padding: '2rem',
-            borderRadius: '12px',
-            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
-            transition: 'transform 0.3s ease'
-          }}>
-            <h3 style={{ color: '#D4A843', fontSize: '1.4rem', marginBottom: '1rem' }}>{service.title}</h3>
-            <p style={{ color: '#ccc', lineHeight: '1.7', fontSize: '1rem' }}>{service.description}</p>
+    <div>
+      <h1 style={{ fontSize: '2.5rem', color: '#D4A843', textAlign: 'center', marginBottom: '3rem' }}>
+        خدماتنا الاحترافية
+      </h1>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+        {servicesList.map((srv, i) => (
+          <div key={i} style={{ backgroundColor: '#1f2833', border: '1px solid #8B0000', borderRadius: '12px', padding: '2rem', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+            <h3 style={{ color: '#D4A843', fontSize: '1.5rem', marginBottom: '1rem' }}>{srv.title}</h3>
+            <p style={{ color: '#cbd5e0' }}>{srv.desc}</p>
           </div>
         ))}
       </div>
