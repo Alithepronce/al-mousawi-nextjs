@@ -1,59 +1,21 @@
-import React from 'react';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div style={{
-      maxWidth: '800px',
-      margin: '4rem auto',
-      textAlign: 'center',
-      padding: '0 1rem'
-    }}>
-      <h1 style={{
-        fontSize: '3rem',
-        color: '#D4A843',
-        marginBottom: '1rem',
-        fontWeight: '800'
-      }}>
-        مكتب الموسوي للخدمات البرمجية ⚖️
+    <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
+      <h1 style={{ fontSize: '3rem', color: '#D4A843', marginBottom: '1.5rem', fontWeight: 'bold' }}>
+        مرحباً بكم في مكتب الموسوي للخدمات البرمجية
       </h1>
-      <p style={{
-        fontSize: '1.25rem',
-        color: '#ccc',
-        lineHeight: '1.8',
-        marginBottom: '2rem'
-      }}>
-        نحن لا نصمم مجرد مواقع، بل نبني هويات رقمية متكاملة وأنظمة ذكية تخدم أعمالك وتزيد من إنتاجيتك. كود نظيف، حماية فائقة، وسرعة لا تقارن.
+      <p style={{ fontSize: '1.25rem', color: '#cbd5e0', maxWidth: '800px', margin: '0 auto 2.5rem' }}>
+        نحن هنا لنحول أفكارك البرمجية إلى حقيقة ملموسة. نوفر حلولاً متكاملة لتصميم المواقع الفاخرة، تطوير الأنظمة المخصصة، وأتمتة العمليات بأعلى معايير الجودة والأمان.
       </p>
-      
-      <div style={{
-        display: 'flex',
-        gap: '1rem',
-        justifyContent: 'center',
-        marginTop: '2rem'
-      }}>
-        <a href="/order" style={{
-          backgroundColor: '#8B0000',
-          color: '#ffffff',
-          padding: '0.8rem 2rem',
-          borderRadius: '8px',
-          fontWeight: 'bold',
-          textDecoration: 'none',
-          boxShadow: '0 4px 15px rgba(139, 0, 0, 0.4)',
-          border: '1px solid #8B0000'
-        }}>
+      <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+        <Link href="/order" className="btn">
           اطلب موقعك الآن 🚀
-        </a>
-        <a href="/services" style={{
-          backgroundColor: 'transparent',
-          color: '#ffffff',
-          padding: '0.8rem 2rem',
-          borderRadius: '8px',
-          fontWeight: 'bold',
-          textDecoration: 'none',
-          border: '1px solid rgba(255, 255, 255, 0.2)'
-        }}>
-          تصفح خدماتنا
-        </a>
+        </Link>
+        <Link href="/services" className="btn" style={{ backgroundColor: '#1f2833', border: '1px solid #D4A843', color: '#D4A843' }}>
+          استعرض خدماتنا
+        </Link>
       </div>
     </div>
   );
