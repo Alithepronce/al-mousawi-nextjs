@@ -2,19 +2,41 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
-      <h1 style={{ fontSize: '3rem', color: '#D4A843', marginBottom: '1.5rem', fontWeight: 'bold' }}>
-        مرحباً بكم في مكتب الموسوي للخدمات البرمجية
-      </h1>
-      <p style={{ fontSize: '1.25rem', color: '#cbd5e0', maxWidth: '800px', margin: '0 auto 2.5rem' }}>
-        نحن هنا لنحول أفكارك البرمجية إلى حقيقة ملموسة. نوفر حلولاً متكاملة لتصميم المواقع الفاخرة، تطوير الأنظمة المخصصة، وأتمتة العمليات بأعلى معايير الجودة والأمان.
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '100vh',
+      textAlign: 'center',
+      padding: '20px',
+      backgroundColor: '#121212'
+    }}>
+      <h1 style={{ color: '#D4A843', fontSize: '2.5rem', marginBottom: '10px' }}>⚖️ مكتب الموسوي للخدمات البرمجية</h1>
+      <p style={{ color: '#ccc', fontSize: '1.2rem', maxWidth: '600px', marginBottom: '30px' }}>
+        نقدم حلولاً برمجية ذكية، واجهات Next.js فائقة السرعة، وأنظمة سحابية متكاملة.
       </p>
-      <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-        <Link href="/order" className="btn">
-          اطلب موقعك الآن 🚀
+      
+      <div style={{ display: 'flex', gap: '15px' }}>
+        <Link href="/services" style={{
+          backgroundColor: '#8B0000',
+          color: 'white',
+          padding: '10px 20px',
+          borderRadius: '8px',
+          textDecoration: 'none',
+          fontWeight: 'bold'
+        }}>
+          خدماتنا 🛠️
         </Link>
-        <Link href="/services" className="btn" style={{ backgroundColor: '#1f2833', border: '1px solid #D4A843', color: '#D4A843' }}>
-          استعرض خدماتنا
+        <Link href="/order" style={{
+          backgroundColor: '#D4A843',
+          color: '#121212',
+          padding: '10px 20px',
+          borderRadius: '8px',
+          textDecoration: 'none',
+          fontWeight: 'bold'
+        }}>
+          اطلب الآن 🚀
         </Link>
       </div>
     </div>
