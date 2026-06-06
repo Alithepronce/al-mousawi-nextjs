@@ -1,121 +1,98 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import React, { useState } from 'react'
 
 export default function Order() {
-  const [formData, setFormData] = useState({
-    name: '',
-    telegram: '',
-    budget: '500',
-    details: '',
-  });
-  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', service: 'website', notes: '' })
+  const [status, setStatus] = useState(null)
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.telegram) {
-      alert('يرجى ملء الحقول المطلوبة (الاسم ومعرّف تيليجرام)');
-      return;
+    e.preventDefault()
+    if (!formData.name || !formData.email) {
+      setStatus('error')
+      return
     }
-    
-    // Save to local storage for demo/backup
-    const existingOrders = JSON.parse(localStorage.getItem('mousawi_orders') || '[]');
-    existingOrders.push({
-      ...formData,
-      date: new Date().toISOString(),
-    });
-    localStorage.setItem('mousawi_orders', JSON.stringify(existingOrders));
-
-    setSubmitted(true);
-  };
+    // Simulate successful request
+    setStatus('success')
+    setFormData({ name: '', email: '', service: 'website', notes: '' })
+  }
 
   return (
-    <>
-      <Header />
-      <main className="container">
-        {!submitted ? (
-          <div className="form-container">
-            <h2 style={{ textAlign: 'center', color: '#D4A843', marginBottom: '20px' }}>اطلب موقعك الجديد</h2>
-            <p style={{ textAlign: 'center', color: '#c5c6c7', marginBottom: '30px' }}>
-              املاً الاستمارة أدناه وسنتواصل معك بأقرب وقت لمناقشة التفاصيل والبدء بالتنفيذ.
-            </p>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="name">الاسم الثلاثي أو اسم الشركة *</label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="مثال: علي الموسوي"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                />
-              </div>
+    <div className="max-w-xl mx-auto py-16 px-4">
+      <div className="bg-[#161616] border border-zinc-800 p-8 rounded-2xl shadow-xl">
+        <h2 className="text-2xl font-black text-center text-[#D4A843] mb-2">استمارة طلب مشروع</h2>
+        <p className="text-zinc-400 text-center text-xs sm:text-sm mb-8">
+          املأ الاستمارة أدناه وسيتواصل معك مهندسو المكتب خلال 24 ساعة لبدء العمل.
+        </p>
 
-              <div className="form-group">
-                <label htmlFor="telegram">معرّف تيليجرام (Telegram Username) *</label>
-                <input
-                  type="text"
-                  id="telegram"
-                  placeholder="مثال: @Alithepronce"
-                  value={formData.telegram}
-                  onChange={(e) => setFormData({ ...formData, telegram: e.target.value })}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="budget">الميزانية التقديرية (بالدولار الأمريكي)</label>
-                <select
-                  id="budget"
-                  value={formData.budget}
-                  onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                >
-                  <option value="300-500">300$ - 500$ (موقع تعريفي بسيط)</option>
-                  <option value="500-1000">500$ - 1000$ (موقع متكامل مع نظام إدارة)</option>
-                  <option value="1000+">أكثر من 1000$ (حلول برمجية مخصصة)</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="details">تفاصيل المشروع المطلوبة</label>
-                <textarea
-                  id="details"
-                  rows="5"
-                  placeholder="اشرح لنا طبيعة عملك وما الذي تحتاجه في موقعك الجديد..."
-                  value={formData.details}
-                  onChange={(e) => setFormData({ ...formData, details: e.target.value })}
-                ></textarea>
-              </div>
-
-              <button type="submit" className="submit-btn">
-                إرسال الطلب الآن 🚀
-              </button>
-            </form>
-          </div>
-        ) : (
-          <div className="form-container" style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '60px', color: '#D4A843', marginBottom: '20px' }}>✅</div>
-            <h2 style={{ color: '#ffffff', marginBottom: '15px' }}>تم إرسال طلبك بنجاح!</h2>
-            <p style={{ color: '#c5c6c7', marginBottom: '30px' }}>
-              شكرًا لثقتك بمكتب الموسوي للخدمات البرمجية. لقد سجلنا طلبك برقم مميز، وسيقوم فريقنا بالتواصل معك عبر حساب تيليجرام <strong>{formData.telegram}</strong> لمناقشة التفاصيل قريباً جداً.
-            </p>
-            <button
-              onClick={() => {
-                setSubmitted(false);
-                setFormData({ name: '', telegram: '', budget: '500', details: '' });
-              }}
-              className="submit-btn"
-              style={{ background: 'transparent', borderColor: '#8B0000', color: '#ffffff' }}
-            >
-              إرسال طلب آخر
-            </button>
+        {status === 'success' && (
+          <div className="bg-emerald-950/40 border border-emerald-500 text-emerald-400 p-4 rounded-xl text-sm mb-6 text-center">
+            🎉 تم تسجيل طلبك بنجاح! سيتصل بك فريقنا قريباً جداً.
           </div>
         )}
-      </main>
-      <Footer />
-    </>
-  );
+
+        {status === 'error' && (
+          <div className="bg-rose-950/40 border border-rose-500 text-rose-400 p-4 rounded-xl text-sm mb-6 text-center">
+            ⚠️ يرجى ملء الحقول الإلزامية (الاسم والبريد الإلكتروني).
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-xs font-bold text-zinc-400 mb-2">الاسم الكريم / الشركة *</label>
+            <input 
+              type="text" 
+              className="w-full bg-[#111111] border border-zinc-800 focus:border-[#8B0000] focus:ring-1 focus:ring-[#8B0000] rounded-xl px-4 py-3 text-sm text-white outline-none transition"
+              placeholder="مثال: شركة الرافدين" 
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-zinc-400 mb-2">البريد الإلكتروني أو رقم الهاتف *</label>
+            <input 
+              type="text" 
+              className="w-full bg-[#111111] border border-zinc-800 focus:border-[#8B0000] focus:ring-1 focus:ring-[#8B0000] rounded-xl px-4 py-3 text-sm text-white outline-none transition"
+              placeholder="name@example.com أو +964..." 
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-zinc-400 mb-2">نوع الخدمة المطلوبة</label>
+            <select 
+              className="w-full bg-[#111111] border border-zinc-800 focus:border-[#8B0000] focus:ring-1 focus:ring-[#8B0000] rounded-xl px-4 py-3 text-sm text-white outline-none transition"
+              value={formData.service}
+              onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+            >
+              <option value="website">تصميم موقع احترافي (Next.js)</option>
+              <option value="bot">تطوير بوت تيليجرام</option>
+              <option value="database">أتمتة وإدارة قواعد البيانات</option>
+              <option value="other">أخرى</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-zinc-400 mb-2">تفاصيل إضافية للمشروع</label>
+            <textarea 
+              rows="4"
+              className="w-full bg-[#111111] border border-zinc-800 focus:border-[#8B0000] focus:ring-1 focus:ring-[#8B0000] rounded-xl px-4 py-3 text-sm text-white outline-none transition resize-none"
+              placeholder="اكتب هنا ما ترغب في تنفيذه بالتفصيل..."
+              value={formData.notes}
+              onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+            />
+          </div>
+
+          <button 
+            type="submit" 
+            className="w-full bg-[#8B0000] hover:bg-[#a00000] text-white py-3.5 rounded-xl font-bold transition shadow-lg shadow-[#8B0000]/20"
+          >
+            إرسال الطلب الآمن 🔒
+          </button>
+        </form>
+      </div>
+    </div>
+  )
 }
